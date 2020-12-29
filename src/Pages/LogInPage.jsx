@@ -17,7 +17,7 @@ const LogInPage = () => {
         <LogInForm />
         <p className="text-sm font-medium text-gray-500 text-center mt-4">
           You don't have an account yet? 
-          <Link className="text-blue-500 block sm:inline"> Register Here</Link>
+          <Link className="text-blue-500 block sm:inline" to='/signup'> Register Here</Link>
         </p>
       </main>
     )

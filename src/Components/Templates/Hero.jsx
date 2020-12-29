@@ -13,7 +13,7 @@ const Hero = () => {
           <br />
           maiores necessitatibus soluta atque eveniet corporis et aperiam.
         </p>
-        <Link to="/destinations" className="bg-blue-500 inline-block text-white transition-all  duration-500	 transform hover:-translate-y-2 font-medium  mt-5 px-10 py-4 rounded-xl w-30 hover:shadow-xl">
+        <Link to="/search" className="bg-blue-500 inline-block text-white transition-all  duration-500	 transform hover:-translate-y-2 font-medium  mt-5 px-10 py-4 rounded-xl w-30 hover:shadow-xl">
           START
         </Link>
       </div>

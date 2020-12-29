@@ -3,12 +3,12 @@ import "./App.css";
 import LogInPage from "./Pages/LogInPage";
 import Navbar from "./Components/Organisms/Navbar";
 import Footer from "./Components/Organisms/Footer";
-
 import SignUpPage from "./Pages/SignUpPage";
 import SearchPage from "./Pages/SearchPage";
 import ContactPage from "./Pages/ContactPage";
 import HomePage from "./Pages/HomePage";
 import ProgramPage from "./Pages/ProgramPage";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <Route path="/contact" component={ContactPage} />
         <Route path="/programs/:programId" component={ProgramPage} />
         <Route path="/search" component={SearchPage} />
+        <Route path="/myuser/:userId" component={UserProfile} />
       </Switch>
       <Footer />
     </BrowserRouter>
