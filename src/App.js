@@ -19,7 +19,7 @@ function App() {
         <Route path="/login" component={LogInPage} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/contact" component={ContactPage} />
-        <Route path="/program" component={ProgramPage} />
+        <Route path="/programs/:programId" component={ProgramPage} />
         <Route path="/search" component={SearchPage} />
       </Switch>
       <Footer />

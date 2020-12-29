@@ -1,6 +1,6 @@
 import React from "react";
-import russianFlag from "../../assets/img/png/001-russia.png";
-import imgPlaceholder from "../../assets/img/png/img-placeholder.png";
+import russianFlag from "../../../assets/png/001-russia.png";
+import imgPlaceholder from "../../../assets/png/img-placeholder.png";
 import { FiBookmark } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
