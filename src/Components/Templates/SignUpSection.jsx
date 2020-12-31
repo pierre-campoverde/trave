@@ -29,7 +29,7 @@ const SignUpSection = () => {
           <p>Lorem ipsum dolor sit amet.</p>
         </div>
         <div className="sign  mx-auto mt-4 ">
-          <p className="text-sm font-medium text-gray-600 ">Sign up with</p>
+          <p className="text-sm font-medium text-gray-600 ">Registrate con</p>
           <div className="flex justify-around mt-2">
             <SocialMediaButton event={signUpFacebook}>
               <FaFacebookSquare className="mx-auto" />
@@ -43,7 +43,7 @@ const SignUpSection = () => {
           </div>
         </div>
         <p className="text-center text-gray-600 text-sm my-6">
-          Or continue with
+          O continua con
         </p>
         <div className="form ">
           <SignInForm/>

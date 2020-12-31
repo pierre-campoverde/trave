@@ -165,6 +165,7 @@ const myUserSlice = createSlice({
     [createUser.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.data = action.payload;
+      state.userLoggedIn = true;
     },
     [createUser.rejected]: (state, action) => {
       state.status = "failed";

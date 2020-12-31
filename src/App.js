@@ -12,14 +12,13 @@ import UserProfile from "./Pages/UserProfile";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./Store/Slices/UserSlice";
-import { auth } from "./Api/config/fbConfig";
 import LoadingPage from "./Pages/LoadingPage";
 function App() {
   const userStatus = useSelector((state) => state.myUser.userLoggedIn);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrentUser());
-  }, [userStatus]);
+  });
 
   return (
     <BrowserRouter>

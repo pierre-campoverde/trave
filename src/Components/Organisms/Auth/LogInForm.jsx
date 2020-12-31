@@ -14,6 +14,7 @@ const LogInForm = () => {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const user = useSelector((state) => state.myUser);
   const history = useHistory();
@@ -34,10 +35,30 @@ const LogInForm = () => {
   //EMAIL AND PASSWORD INPUT HANDLER
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "email") {
+      const emailFormated = value.toLowerCase().trim();
+      const patt = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const emailValidation = patt.test(emailFormated);
+      if (!emailValidation) {
+        setErrors((prevState) => ({
+          ...prevState,
+          [name]: "signInError/Invalid email",
+        
+        }));
+      } else {
+        setUserCredentials((prevState) => ({
+          ...prevState,
+          [name]: emailFormated,
+        }));
+        setErrors((prevState) => ({ ...prevState, [name]: "success" }));
+      }
+    }
     setUserCredentials((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+  
+    console.log(errors)
   };
   //EMAIL AND PASSWORD SUBMIT HANDLER
   const handleSubmit = (e) => {
@@ -56,9 +77,6 @@ const LogInForm = () => {
   const handleLogInFacebook = () => {
     dispatch(logInUserFacebook());
   };
-  //TODO:Create a method to disable all inputs while loading
-  //*Hacemos un fetching del usuario sin embargo deberia se un componente de mayo jerarquia quien administre eso
-
   const loadingStatus = (userStatus) => {
     if (userStatus === "loading") {
       return (
@@ -68,6 +86,15 @@ const LogInForm = () => {
       return "Log In";
     }
   };
+  const inputStyles=(name)=>{
+    if(name==="signInError/Invalid Name"||name==="signInError/Invalid email"||name==="signInError/Invalid Password"){
+      return "input-error"
+    }else if(name==="success"){
+      return "input-success"
+    }else{
+      return "input"
+    }}
+
   return (
     <div className="border-2 p-4 w-11/12 sm:w-96 mx-auto rounded-lg px-8 shadow-md mt-4 md:mt-8">
       <form onSubmit={handleSubmit}>
@@ -78,7 +105,7 @@ const LogInForm = () => {
           <input
             type="email"
             name="email"
-            className="input "
+            className={`${inputStyles(errors.email)}`}
             required
             disabled={disableInputs}
             onChange={handleChange}
@@ -95,7 +122,6 @@ const LogInForm = () => {
             onChange={handleChange}
             className="input"
             required
-
           />
         </div>
         <div className="flex my-4 justify-between align-middle	">

@@ -15,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="bg-white shadow-sm sticky relative top-0  block w-full   z-40 mb-15 ">
+      <nav className="bg-white absolute sticky relative top-0  block w-full border-b border-gray-300  z-40 mb-15 ">
         <div className="container mx-auto  p-4 flex flex-wrap items-center justify-between  md:flex-no-wrap">
           <div className="logo ">
             <Link to="/">
