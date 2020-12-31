@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/svg/Logo'
 import LogInForm from '../Components/Organisms/Auth/LogInForm'
 const LogInPage = () => {
-
     return (
         <main className=" flex-col content-center h-screen py-16 md:py-24">
         <div className="justify-center content-center flex flex-col ">
@@ -17,7 +16,7 @@ const LogInPage = () => {
         <LogInForm />
         <p className="text-sm font-medium text-gray-500 text-center mt-4">
           You don't have an account yet? 
-          <Link className="text-blue-500 block sm:inline" to='/signup'> Register Here</Link>
+          <Link className="text-blue-500 block sm:inline" to='/signup'>Register Here</Link>
         </p>
       </main>
     )

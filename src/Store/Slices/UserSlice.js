@@ -1,39 +1,97 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { auth } from "../../Api/config/fbConfig";
+import { auth, db } from "../../Api/config/fbConfig";
 import { googleProvider, fbProvider } from "../../Api/config/fbConfig";
 const initialState = {
   data: {},
   status: "idle",
   error: null,
-  errorMessage: "",
+  errorCode: "",
+  userLoggedIn: null,
 };
+//*GET THE CURRENT USER
 
+export const getCurrentUser = createAsyncThunk(
+  "myUser/getCurrentUser",
+  async () => {
+    const getUserId = () => {
+      return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          unsubscribe();
+          if (user) {
+            console.log(user);
+            resolve(user.uid);
+          } else {
+            reject("No user");
+          }
+        });
+      });
+    };
+    const getUserData = async (userId) => {
+      try {
+        const response = await db.collection("Users").doc(userId).get();
+        return response.data();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const userId = await getUserId();
+    if (userId) {
+      const userData = getUserData(userId);
+      return userData;
+    } else {
+      return false;
+    }
+  }
+);
+//*LOG OUT
+export const logOutUser = createAsyncThunk("myUser/userLogOut", async () => {
+  try {
+    const response = await auth.signOut();
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+});
+//*SIGN UP WITH EMAIL AND PASSWORD
+export const createUser = createAsyncThunk(
+  "myUser/createUser",
+  async (userCredentials) => {
+    const credentials = await auth.createUserWithEmailAndPassword(
+      userCredentials.email,
+      userCredentials.password
+    );
+    const userData = {
+      email: credentials.user.email,
+      uid: credentials.user.uid,
+      photoURL: credentials.user.photoURL,
+      isNewUSer: credentials.additionalUserInfo.isNewUser,
+      emailVerified: credentials.user.emailVerified,
+      firstName: userCredentials.firstName,
+      familyName: userCredentials.familyName,
+      fullName: userCredentials.firstName + " " + userCredentials.familyName,
+    };
+    await db.collection("Users").doc(userData.uid).set(userData);
+    return userData;
+  }
+);
 //*LOG IN WITH EMAIL AND PASSWORD
 export const logInUser = createAsyncThunk(
   "myUser/userLogIn",
   async (userCredentials) => {
-    try {
-      const credential = await auth.signInWithEmailAndPassword(
-        userCredentials.email,
-        userCredentials.password
-      );
-
-      const {
-        email,
-        uid,
-        displayName,
-        photoURL,
-        emailVerified,
-      } = credential.user;
-      return { email, uid, displayName, photoURL, emailVerified };
-    } catch (error) {
-      //!Este error esta siendo utilizado como payload es por eso que se guarda en el nombre del usuario
-      //!Utilizar un methodo para que filtre si es un user o un error
-      return error.code;
-    }
+    const credential = await auth.signInWithEmailAndPassword(
+      userCredentials.email,
+      userCredentials.password
+    );
+    const {
+      email,
+      uid,
+      displayName,
+      photoURL,
+      emailVerified,
+    } = credential.user;
+    return { email, uid, displayName, photoURL, emailVerified };
   }
 );
-
 //*LOG IN WITH GOOGLE
 export const logInUserGoogle = createAsyncThunk(
   "myUser/userLoginGoogle",
@@ -48,7 +106,11 @@ export const logInUserGoogle = createAsyncThunk(
       photoURL: credentials.additionalUserInfo.profile.picture,
       locale: credentials.additionalUserInfo.profile.locale,
     };
-    console.log(credentials);
+    const userDataUpldoaded = await db
+      .collection("Users")
+      .doc(userData.uid)
+      .set(userData);
+    console.log(userDataUpldoaded);
     return userData;
   }
 );
@@ -80,18 +142,48 @@ const myUserSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    //*GETTING CURRENT USER
+    [getCurrentUser.pending]: (state, action) => {
+      state.status = "loading";
+      console.log(state.status);
+    },
+    [getCurrentUser.fulfilled]: (state, action) => {
+      state.status = "succeded";
+      state.data = action.payload;
+      state.userLoggedIn = true;
+      console.log(action.payload);
+    },
+    [getCurrentUser.rejected]: (state, action) => {
+      state.status = "error";
+      state.userLoggedIn = false;
+      console.log(action.error);
+    },
+    //*CREATE USER
+    [createUser.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [createUser.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.data = action.payload;
+    },
+    [createUser.rejected]: (state, action) => {
+      state.status = "failed";
+      state.errorCode = action.error.code;
+      console.log(state.errorMessage);
+    },
+
     //*LOG IN WITH EMAIL & PASSWORD EXTRA-REDUCERS
     [logInUser.pending]: (state, action) => {
       state.status = "loading";
     },
     [logInUser.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.myUserData = action.payload;
+      state.data = action.payload;
+      state.userLoggedIn = true;
     },
     [logInUser.rejected]: (state, action) => {
       state.status = "failed";
-      state.errorMessage = action.error.message;
-      console.log(state.errorMessage);
+      state.errorCode = action.error.message;
     },
 
     //*LOG IN WITH GOOGLE EXTRA-REDUCERS
@@ -119,6 +211,19 @@ const myUserSlice = createSlice({
       state.status = "failed";
       console.log(action.error);
     },
+    //*LOG OUT
+    [logOutUser.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [logOutUser.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.userLoggedIn = "false";
+      state.data = {};
+    },
+    [logOutUser.rejected]: (state, action) => {
+      state.status = "failed";
+    },
   },
 });
+
 export default myUserSlice.reducer;

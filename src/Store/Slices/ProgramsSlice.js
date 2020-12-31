@@ -30,6 +30,7 @@ const programSlice = createSlice({
     },
     [fetchPrograms.fulfilled]: (state, action) => {
       state.status = "succeeded";
+      console.log(action);
       state.programs = state.programs.concat(action.payload);
     },
     [fetchPrograms.rejected]: (state, action) => {

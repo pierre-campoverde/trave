@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 const SocialMediaButton = (props) => {
     return (
         <button onClick={props.event} className="border-2 rounded py-2 w-24 text-gray-400 text-2xl text-center

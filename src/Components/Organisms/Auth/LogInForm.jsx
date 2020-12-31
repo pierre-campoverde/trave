@@ -1,21 +1,35 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { FaFacebookSquare, FaTwitter, FaGoogle } from "react-icons/fa";
 import SocialMediaButton from "../../Atoms/SocialMediaButton";
-import { logInUser, logInUserGoogle , logInUserFacebook } from "../../../Store/Slices/UserSlice";
+import {
+  logInUser,
+  logInUserGoogle,
+  logInUserFacebook,
+} from "../../../Store/Slices/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../../Api/config/fbConfig";
 import { ImSpinner8 } from "react-icons/im";
-import { useHistory } from "react-router-dom";
 const LogInForm = () => {
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
   });
-  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.myUser);
+  const history = useHistory();
 
+ const disableInputs = (user) => {
+    if (user.status === "loading") {
+      return true;
+    } else {
+      return false;
+    }
+  }; 
+  useEffect(() => {
+    if (user.userLoggedIn === true) {
+      history.push("/search");
+    }
+  });
   //*EVENT HANDLERS
   //EMAIL AND PASSWORD INPUT HANDLER
   const handleChange = (e) => {
@@ -29,17 +43,19 @@ const LogInForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(logInUser(userCredentials));
-    const user = auth.currentUser;
-    console.log(user.email, user.uid);
+    if (user.userLoggedIn === true) {
+      history.push("/search");
+    }
   };
   //GOOGLE SIGN IN HANDLER
-  const handleLogInGoogle =(e) => {
-     dispatch(logInUserGoogle());
+  const handleLogInGoogle = () => {
+    dispatch(logInUserGoogle());
+    console.log("works");
   };
   //FACEBOOK SIGN IN HANDLER
-  const handleLogInFacebook =(e) => {
+  const handleLogInFacebook = () => {
     dispatch(logInUserFacebook());
- };
+  };
   //TODO:Create a method to disable all inputs while loading
   //*Hacemos un fetching del usuario sin embargo deberia se un componente de mayo jerarquia quien administre eso
 
@@ -62,9 +78,9 @@ const LogInForm = () => {
           <input
             type="email"
             name="email"
-            className="block py-1 mt-1 focus:outline-none focus:ring-blue-600 focus:ring-2 px-3 rounded-md border-2 w-full"
-            placeholder="your-email@here.com"
+            className="input "
             required
+            disabled={disableInputs}
             onChange={handleChange}
           />
         </div>
@@ -73,12 +89,13 @@ const LogInForm = () => {
             Password
           </label>
           <input
+          disabled={disableInputs}
             type="password"
             name="password"
             onChange={handleChange}
-            className="block py-1 mt-1 focus:ring-blue-600 focus:outline-none focus:ring-2 px-3 rounded-md border-2 w-full"
-            placeholder="••••••••••"
+            className="input"
             required
+
           />
         </div>
         <div className="flex my-4 justify-between align-middle	">
@@ -99,15 +116,7 @@ const LogInForm = () => {
             Forgot your password?
           </Link>
         </div>
-        <button
-          type="submit"
-          className="w-full 
-            rounded 
-          h-10 cursor-pointer
-          bg-blue-500 text-white
-          hover:bg-blue-600
-             text-sm hover:shadow-lg disabled:opacity-50 transition-all duration-300 ease-in"
-        >
+        <button type="submit" className="btn-primary disabled:opacity-50  w-full" >
           {loadingStatus(user.status)}
         </button>
       </form>
@@ -115,15 +124,14 @@ const LogInForm = () => {
         Or continue with
       </p>
       <div className="flex justify-between">
-        
-        <SocialMediaButton  event={handleLogInFacebook}>
+        <SocialMediaButton event={handleLogInFacebook}>
           <FaFacebookSquare className="mx-auto" />
         </SocialMediaButton>
-        <SocialMediaButton >
+        <SocialMediaButton>
           <FaTwitter className="mx-auto" />
         </SocialMediaButton>
         <SocialMediaButton event={handleLogInGoogle}>
-          <FaGoogle className="mx-auto"  />
+          <FaGoogle className="mx-auto" />
         </SocialMediaButton>
       </div>
     </div>

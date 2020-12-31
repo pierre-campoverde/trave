@@ -1,5 +1,5 @@
 import React from 'react'
-import SignUpForm from '../Components/Organisms/Auth/SignUpForm'
+import SignUpForm from '../Components/Templates/SignUpSection'
 const SignUpPage = () => {
 
     return (

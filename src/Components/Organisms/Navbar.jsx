@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../Atoms/Button";
 import { FiMenu, FiX } from "react-icons/fi";
 import Logo from "../../assets/svg/Logo";
 import UserMenu from "../Molecules/User/UserMenu";
-import { auth } from "../../Api/config/fbConfig";
+import { useSelector } from "react-redux";
+//*Crrear un variable neutra mientras que no se compuebe el stado se manteien neutra (Loading)
 const Navbar = () => {
   const [clicked, setClicked] = useState(true);
-  const [userExistence, setuser] = useState(null)
+  const userStatus = useSelector((state) => state.myUser.userLoggedIn);
+  console.log(userStatus);
   const handleClick = () => {
     setClicked(!clicked);
   };
-  auth.onAuthStateChanged(function (user) {
-    if (user) {
-      setuser(true)
-      console.log(userExistence)
-    } else {
-     setuser(userExistence)
-    }
-  });
-  //TODO:Modificar el user dependiendo del stado del usuario
-
   return (
     <>
       <nav className="bg-white shadow-sm sticky relative top-0  block w-full   z-40 mb-15 ">
@@ -42,6 +34,7 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   className="m-2 transition-all text-gray-500 font-medium hover:text-blue-600 ease-in duration-200 text-md 	"
@@ -62,9 +55,14 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-
-          
-          
+          {userStatus ? (
+            <UserMenu />
+          ) : (
+            <div className="hidden button-group md:flex mr-5">
+              <Button type={"secondary"} to={"/signup"} name={"Sign Up"} />
+              <Button type={"primary"} to={"/login"} name={"Log in"} />
+            </div>
+          )}
           {/*---------Hamburger----------*/}
           <div
             className="ml-auto md:hidden text-3xl cursor-pointer "
@@ -79,15 +77,6 @@ const Navbar = () => {
             </span>
           </div>
           {/*Buttons Sign In  */}
-        
-          {userExistence ? (
-            <UserMenu />
-          ) : (
-            <div className="hidden button-group md:flex mr-5">
-              <Button type={"secondary"} to={"/signup"} name={"Sign Up"} />
-              <Button type={"primary"} to={"/login"} name={"Log in"} />
-            </div>
-          )} 
         </div>
       </nav>
       <div
