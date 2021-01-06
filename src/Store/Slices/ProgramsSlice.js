@@ -7,6 +7,7 @@ const initialState = {
 };
 
 //*Async Request to Fireabase
+//?oBTENER PROGRAMAS ALEATORIOS POR AHORA
 
 export const fetchPrograms = createAsyncThunk(
   "programs/fetchPrograms",
@@ -19,7 +20,6 @@ export const fetchPrograms = createAsyncThunk(
 );
 
 //*SLICE
-
 const programSlice = createSlice({
   name: "programs",
   initialState,
@@ -30,7 +30,6 @@ const programSlice = createSlice({
     },
     [fetchPrograms.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      console.log(action);
       state.programs = state.programs.concat(action.payload);
     },
     [fetchPrograms.rejected]: (state, action) => {
@@ -39,6 +38,7 @@ const programSlice = createSlice({
     },
   },
 });
+//*
 
 //*SELECTORS
 

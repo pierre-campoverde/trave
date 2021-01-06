@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./Store/Slices/UserSlice";
 import LoadingPage from "./Pages/LoadingPage";
+import { Toaster } from "react-hot-toast";
 function App() {
   const userStatus = useSelector((state) => state.myUser.userLoggedIn);
   const dispatch = useDispatch();
@@ -34,8 +35,10 @@ function App() {
             <Route path="/contact" component={ContactPage} />
             <Route path="/programs/:programId" component={ProgramPage} />
             <Route path="/search" component={SearchPage} />
+            <Route path="/programs" component={SearchPage} />
             <Route path="/myuser/:userId" component={UserProfile} />
           </Switch>
+          <Toaster position="bottom-left" />
           <Footer />
         </>
       )}

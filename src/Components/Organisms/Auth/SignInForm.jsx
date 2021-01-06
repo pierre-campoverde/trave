@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import { createUser } from "../../../Store/Slices/UserSlice";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { ImSpinner8 } from "react-icons/im";
+import Input from "../../Atoms/Input";
+import ButtonSubmit from "../../Atoms/ButtonSubmit";
+import Checkbox from "../../Atoms/Checkbox";
 const SignInForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -70,14 +72,15 @@ const SignInForm = () => {
       }
     }
   };
-  console.log(errors);
+
   //*CHECK USER LOG
   useEffect(() => {
     if (myUser.userLoggedIn === true) {
       history.push("/search");
     }
   });
-  //*HANDLE SUBMIT
+
+  //*EVENT HANDLERS HANDLE SUBMIT
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createUser(userCredentials));
@@ -85,83 +88,56 @@ const SignInForm = () => {
       history.push("/search");
     }
   };
-  const inputStyles=(name)=>{
-      if(name==="signInError/Invalid Name"||name==="signInError/Invalid email"||name==="signInError/Invalid Password"){
-        return "input-error"
-      }else if(name==="success"){
-        return "input-success"
-      }else{
-        return "input"
-      }
-  }
+
+  //*HANDLE ERRORS STYLES
+  const inputStyles = (name) => {
+    if (
+      name === "signInError/Invalid Name" ||
+      name === "signInError/Invalid email" ||
+      name === "signInError/Invalid Password"
+    ) {
+      return "input-error";
+    } else if (name === "success") {
+      return "input-success";
+    } else {
+      return "input";
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex">
-        <div className="input-group my-2 pr-2">
-          <label htmlFor="email" className="text-sm font-medium">
-            Nombre
-          </label>
-          <input
-            onChange={handleChange}
-            type="text"
-            name="firstName"
-            className={`${inputStyles(errors.firstName)
-            }`}
-          />
-        </div>
-        <div className="input-group my-2">
-          <label htmlFor="email" className="text-sm font-medium">
-            Apellido
-          </label>
-          <input
-            onChange={handleChange}
-            type="text"
-            name="familyName"
-            className={`${inputStyles(errors.familyName)
-            }`}
-          />
-        </div>
-      </div>
-
-      <div className="input-group my-2">
-        <label htmlFor="email" className="text-sm font-medium">
-          Email
-        </label>
-        <input
-          onChange={handleChange}
-          type="email"
-          name="email"
-          className={`${inputStyles(errors.email)
-          }`}
+        <Input
+          type={"text"}
+          name={"firstName"}
+          label={"Nombre"}
+          handleChangeCallback={handleChange}
+          styles={inputStyles(errors.firstName)}
+          extraStyles={"pr-2"}
+        />
+        <Input
+          type={"text"}
+          name={"familyName"}
+          label={"Apellido"}
+          handleChangeCallback={handleChange}
+          styles={inputStyles(errors.familyName)}
         />
       </div>
-      <div className="input-group my-2">
-        <label htmlFor="email" className="text-sm font-medium">
-          Contraseña
-        </label>
-
-        <input
-          onChange={handleChange}
-          type="password"
-          name="password"
-          className={`${inputStyles(errors.password)
-          }`}
-        />
-      </div>
-      <div className="flex text-sm">
-        <label htmlFor="terms" className="font-light">
-          Acepto los terminos de privacidad
-        </label>
-      </div>
-      <div className="input-group my-2">
-        <button type="submit" className="btn-primary w-full ">
-          {myUser.status === "loading" ? (
-            <ImSpinner8 className="text-2xl text-center mx-auto animate-spin" />
-          ) : (
-            <p>Sign Up</p>
-          )}
-        </button>
-      </div>
+      <Input
+        type={"email"}
+        name={"email"}
+        label={"Email"}
+        handleChangeCallback={handleChange}
+        styles={inputStyles(errors.email)}
+      />
+      <Input
+        type={"password"}
+        name={"password"}
+        label={"Password"}
+        handleChangeCallback={handleChange}
+        styles={inputStyles(errors.password)}
+      /> <div className={`bg-red-100 rounded-lg p-1 ${errors.password==="signInError/Invalid Password"?"block":"hidden"} `}><p className="text-xs font-medium text-red-600">La contraseña debe contener al menos 8 digitos y un numero</p></div>
+      <Checkbox label={"Acepto los terminos de servicio"} name={"terms"} />
+      <ButtonSubmit myUserStatus={myUser.status} value={"Registrarse"} />
     </form>
   );
 };

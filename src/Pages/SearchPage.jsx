@@ -1,12 +1,15 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import ProgramFilter from '../Components/Organisms/Search/ProgramFilter'
 import SearchResults from '../Components/Templates/SearchResult/SearchResults'
-const SearchPage = () => {
+
+const SearchPage = ({location}) => {
+    console.log(location)
     return (
-        <div className="relative h-auto w-full sm:flex ">
+        <main className="h-auto w-11/12 mx-auto lg:flex ">
         <ProgramFilter/>
         <SearchResults/>
-    </div>
+    </main>
     )
 }
 

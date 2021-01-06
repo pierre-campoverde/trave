@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaBell, FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle } from "../../../Store/Slices/UiSlice";
 import { Link } from "react-router-dom";
+import MyUserMenu from "./MyUserMenu";
 
-const UserMenu = () => {
+const UserMenu = (props) => {
   // eslint-disable-next-line
-
-
   const myUser = useSelector((state) => state.myUser.data);
+  const menuStatus = useSelector((state) => state.interface.value);
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    if(menuStatus===false){
+      dispatch(toggle());
+    }
+  };
   return (
     <div className="flex">
       <Link
         to={`/myuser/${myUser.uid}`}
-        className="cursor pointer flex bg-gray-200  h-10 rounded-full border-2 mx-2 cursor-pointer hover:bg-gray-300 "
+        className="cursor pointer flex   h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-lg  "
       >
         {myUser.photoURL === null ? (
           <FaUserCircle className="text-3xl my-auto text-gray-600 rounded-full border-2 border-gray-500 bg-white" />
@@ -27,24 +34,19 @@ const UserMenu = () => {
         <p className="my-auto mr-2  ml-1 font-medium text-sm text-gray-800">
           {myUser.firstName}
         </p>
+        <img src="" alt="" />
       </Link>
       <div className=" mx-2  ">
-        <button
-
-          className="bg-gray-200 rounded-full focus:outline-none focus:ring-2 w-10 h-10 focus:ring-gray-600 w-10"
-        >
+        <button className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-md">
           <FaBell className="text-2xl text-gray-900 m-auto " />
         </button>
       </div>
-      <div className=" mx-2 rounded-full flex bg-gray-200 text-center w-10 h-10 cursor-pointer hover:bg-gray-300">
-      <button
-
-          className="bg-gray-200 rounded-full focus:outline-none focus:ring-2 w-10 h-10 focus:ring-gray-600 w-10"
-        >
+      <div className="">
+        <button onClick={handleClick} disabled={menuStatus} className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-md">
           <HiMenu className="text-2xl text-gray-900 m-auto" />
         </button>
       </div>
-     
+      {menuStatus && <MyUserMenu />}
     </div>
   );
 };

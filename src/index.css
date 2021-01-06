@@ -25,13 +25,13 @@
         @apply md:text-xl text-base text-gray-500 sm:text-lg
     }
     .btn-bordered-blue{
-        @apply bg-white border-2 border-blue-500 duration-500  hover:bg-blue-500 hover:text-white transition-colors  hover:shadow-md text-blue-400	font-medium py-2 px-4 rounded-md 
+        @apply bg-white rounded-full border-2 border-blue-800 duration-500  hover:bg-blue-800 hover:text-white transition-colors  hover:shadow-md text-blue-800	font-medium py-2 px-4 
     }
     .btn-primary{
-        @apply bg-blue-500 max-h-10 font-medium text-white h-10 px-4 text-base rounded-md  hover:shadow-md duration-500 transition-colors hover:bg-blue-700 cursor-pointer
+        @apply bg-blue-800 max-h-10 font-medium text-white h-10 px-4 text-base rounded-full  hover:shadow-md duration-500 transition-colors hover:bg-blue-900 cursor-pointer
     }
     .btn-secondary{
-       @apply cursor-pointer bg-gray-900 hover:shadow-md duration-500 transition-colors hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md 
+       @apply cursor-pointer bg-gray-900 hover:shadow-md duration-500 transition-colors hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-full 
     }
     .input{
         @apply block py-1 mt-1 bg-gray-100 disabled:opacity-50 focus:border-white focus:outline-none focus:ring-2 focus:ring-blue-600 px-3 rounded-md border-2 w-full
@@ -41,5 +41,13 @@
     }
     .input-success{
         @apply bg-green-100 block py-1 mt-1 rounded-md border-2 border-white w-full outline-none ring-2 ring-green-500 px-3;
+    }
+    /*CARD STYLES*/
+    .card{
+     
+    }
+    .card-slider
+    {
+        @apply h-48 bg-gray-100 
     }
 }

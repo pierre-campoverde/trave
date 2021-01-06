@@ -11,31 +11,31 @@ const Footer = () => {
             <div className="col-span-6 md:col-span-3 my-2">
               <ul className="flex-1">
                 <li>
-                  <h3 className="font-semibold text-gray-400">PROGRAMS</h3>
+                  <h3 className="font-semibold text-gray-400 text-sm">ACERCA DE</h3>
                 </li>
                  <li className="mt-2">
-                  <Link to="/bachelor" className="md:text-md">
-                    Bachelor
+                  <Link to="/bachelor" className="md:text-md hover:underline">
+                    Como funciona trave
                   </Link>
                 </li>
                 <li className="mt-2">
-                  <Link to="/bachelor" className="md:text-md">
-                    Master Degree
+                  <Link to="/bachelor" className="md:text-md hover:underline">
+                    Sala de prensa
                   </Link>
                 </li>
                 <li className="mt-2">
-                  <Link to="/bachelor" className="md:text-md">
-                    PHD
+                  <Link to="/bachelor" className="md:text-md hover:underline">
+                    Inversionistas
                   </Link>
                 </li>
                 <li className="mt-2">
-                  <Link to="/bachelor" className="md:text-md">
-                    Language Schools
+                  <Link to="/bachelor" className="md:text-md hover:underline">
+                    Trave Communities
                   </Link>
                 </li>
                 <li className="mt-2">
-                  <Link to="/bachelor" className="md:text-md">
-                    Summer Schools
+                  <Link to="/bachelor" className="md:text-md hover:underline">
+                    Contacto
                   </Link>
                 </li> 
               </ul>
@@ -43,21 +43,21 @@ const Footer = () => {
             <div className="col-span-6 md:col-span-3 my-2">
               <ul className="flex-1">
                 <li>
-                  <h3 className="font-semibold text-gray-400">DESTINATIONS</h3>
+                  <h3 className="font-semibold text-gray-400 text-sm">PARA ESTUDIANTES</h3>
                 </li>
                 <li className="mt-2">
                   <Link to="/" className="md:text-md">
-                    Russia
+                    Countries
                   </Link>
                 </li>
                 <li className="mt-2">
                   <Link to="/" className="md:text-md">
-                    Argetina
+                    Program finder
                   </Link>
                 </li>
                 <li className="mt-2">
                   <Link to="/" className="md:text-md">
-                    Poland
+                    Apptitudinal test
                   </Link>
                 </li>
                 <li className="mt-2">
@@ -70,23 +70,23 @@ const Footer = () => {
             <div className="col-span-6 md:col-span-3 my-2">
               <ul className="flex-1">
                 <li>
-                  <h3 className="font-semibold text-gray-400">COMPANY</h3>
+                  <h3 className="font-semibold text-gray-400 text-sm">PARA INSTITUCIONES</h3>
                 </li>
                 <li className="mt-2">
-                  <Link to='/' className="md:text-md">About</Link>
+                  <Link to='/' className="md:text-md">Registrar institucion</Link>
                 </li>
                 <li className="mt-2">
-                  <Link to='/' className="md:text-md">Blog</Link>
+                  <Link to='/' className="md:text-md">Terminos de uso</Link>
                 </li>
                 <li className="mt-2">
-                  <Link to='/' className="md:text-md">Partners</Link>
+                  <Link to='/' className="md:text-md">Politica de privacidad</Link>
                 </li>
               </ul>
             </div>
             <div className="col-span-6 md:col-span-3 my-2">
               <ul className="flex-1">
                 <li>
-                  <h3 className="font-semibold text-gray-400">LEGAL</h3>
+                  <h3 className="font-semibold text-gray-400 text-sm">COMUNIDAD</h3>
                 </li>
                 <li className="mt-2">
                   <Link to="/" className="md:text-md">

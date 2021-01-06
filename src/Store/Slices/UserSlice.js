@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { auth, db } from "../../Api/config/fbConfig";
 import { googleProvider, fbProvider } from "../../Api/config/fbConfig";
+import toast from "react-hot-toast";
 const initialState = {
   data: {},
   status: "idle",
@@ -8,6 +9,9 @@ const initialState = {
   errorCode: "",
   userLoggedIn: null,
 };
+
+//*NOTIFICATION SYSTEM
+
 //*GET THE CURRENT USER
 
 export const getCurrentUser = createAsyncThunk(
@@ -60,6 +64,7 @@ export const createUser = createAsyncThunk(
       userCredentials.email,
       userCredentials.password
     );
+
     const userData = {
       email: credentials.user.email,
       uid: credentials.user.uid,
@@ -89,6 +94,7 @@ export const logInUser = createAsyncThunk(
       photoURL,
       emailVerified,
     } = credential.user;
+    //!indexar con firestore
     return { email, uid, displayName, photoURL, emailVerified };
   }
 );
@@ -131,7 +137,7 @@ export const logInUserFacebook = createAsyncThunk(
       isDefautlPicture:
         credentials.additionalUserInfo.profile.picture.data.is_silhouette,
     };
-    console.log(credentials);
+    await db.collection("Users").doc(userData.uid).set(userData);
     return userData;
   }
 );
@@ -170,7 +176,9 @@ const myUserSlice = createSlice({
     [createUser.rejected]: (state, action) => {
       state.status = "failed";
       state.errorCode = action.error.code;
-      console.log(state.errorMessage);
+      if (action.error.code === "auth/email-already-in-use") {
+        toast.error("Este email ya esta en uso");
+      }
     },
 
     //*LOG IN WITH EMAIL & PASSWORD EXTRA-REDUCERS
@@ -181,10 +189,14 @@ const myUserSlice = createSlice({
       state.status = "succeeded";
       state.data = action.payload;
       state.userLoggedIn = true;
+      toast.success("Bienvenido");
     },
     [logInUser.rejected]: (state, action) => {
       state.status = "failed";
-      state.errorCode = action.error.message;
+      state.errorCode = action.error.code;
+      if (state.errorCode === "auth/wrong-password") {
+        toast.error("Contraseña incorrecta");
+      }
     },
 
     //*LOG IN WITH GOOGLE EXTRA-REDUCERS
@@ -194,6 +206,7 @@ const myUserSlice = createSlice({
     [logInUserGoogle.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.data = action.payload;
+      state.userLoggedIn = true;
     },
     [logInUserGoogle.rejected]: (state, action) => {
       state.status = "failed";
@@ -207,6 +220,7 @@ const myUserSlice = createSlice({
     [logInUserFacebook.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.data = action.payload;
+      state.userLoggedIn = true;
     },
     [logInUserFacebook.rejected]: (state, action) => {
       state.status = "failed";
