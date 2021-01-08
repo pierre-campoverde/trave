@@ -7,7 +7,7 @@ const ProgramFilter = () => {
             <div className="shadow-md mx-auto my-6 lg:w-12/12 xl:w-11/12  hidden lg:block rounded-md border p-4">
                 <form >
                 <label htmlFor="program" className="text-sm text-gray-500">Programa:</label>
-                    <select name="Program" id="ProgramType" placeholder="Program" className="border-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 w-full bg-gray-50 rounded-lg ">
+                    <select name="program" id="ProgramType" placeholder="Program" className="border-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 w-full bg-gray-50 rounded-lg ">
                         <option value="Bachelor">Bachelor</option>
                         <option value="Bachelor">Master</option>
                         <option value="Bachelor">PHD</option>

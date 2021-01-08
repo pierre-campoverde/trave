@@ -2,7 +2,7 @@ import React from "react";
 
 const InputLink = (props) => {
   return (
-    <div className="rounded-lg group  rounded-3xl px-2 hover:bg-gray-100 cursor-pointer flex text-left transition ease-in duration-200 h-full content-center ">
+    <div className="rounded-4xl group  rounded-3xl px-2 hover:bg-gray-100 cursor-pointer flex text-left transition ease-in duration-200 h-full content-center ">
       <div className="my-auto ">
         <label
           htmlFor={props.name}

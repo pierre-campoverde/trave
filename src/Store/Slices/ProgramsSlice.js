@@ -4,11 +4,13 @@ const initialState = {
   programs: [],
   status: "idle",
   error: null,
+  query: { country: "", program: "", area: "", especiality: "" },
+  errorMessage: "",
 };
 
 //*Async Request to Fireabase
 //?oBTENER PROGRAMAS ALEATORIOS POR AHORA
-
+//*OBTENEMOS TODOS LOS PROGRAMAS
 export const fetchPrograms = createAsyncThunk(
   "programs/fetchPrograms",
   async () => {
@@ -19,12 +21,38 @@ export const fetchPrograms = createAsyncThunk(
   }
 );
 
+//*OBTENEMOS PROGRAMAS FILTRADOS DESDE LA HOME PAGE
+export const fetchQuery = createAsyncThunk(
+  "programs/fetchQuery",
+  async (query) => {
+    const queryRes = [];
+    if (query.country) {
+      console.log(query.country);
+    } else {
+      console.log(query);
+    }
+    const response = await db
+      .collection("Programs")
+      .where("country", "==", `${query.country}`)
+      .get();
+    console.log(query.country);
+    response.forEach((doc) => queryRes.push({ id: doc.id, ...doc.data() }));
+    console.log(queryRes);
+    return queryRes;
+  }
+);
+
 //*SLICE
-const programSlice = createSlice({
+const ProgramSlice = createSlice({
   name: "programs",
   initialState,
-  reducers: {},
+  reducers: {
+    addQuery(state, action) {
+      state.query = action.payload;
+    },
+  },
   extraReducers: {
+    //*FETCHING ALL PROGRAMS REDUCER */
     [fetchPrograms.pending]: (state, action) => {
       state.status = "loading";
     },
@@ -36,13 +64,27 @@ const programSlice = createSlice({
       state.status = "failed";
       state.error = action.error.message;
     },
+    //*FETCHING QUERIES REDUCER
+    [fetchQuery.pending]: (state, action) => {
+      state.status = "loading";
+      console.log("Loading");
+    },
+    [fetchQuery.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.programs = action.payload;
+    },
+    [fetchQuery.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.name;
+      state.errorMessage = action.error.code;
+    },
   },
 });
 //*
 
 //*SELECTORS
-
+export const { addQuery } = ProgramSlice.actions;
 export const selectAllPrograms = (state) => state.programs.programs;
 export const selectProgramsById = (state, programId) =>
   state.programs.programs.find((program) => program.id === programId);
-export default programSlice.reducer;
+export default ProgramSlice.reducer;

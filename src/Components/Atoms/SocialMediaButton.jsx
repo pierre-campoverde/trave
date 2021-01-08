@@ -5,7 +5,7 @@ const SocialMediaButton = (props) => {
            hover:border-gray-400  hover:text-gray-600 hover:shadow-lg 
            transition-all ease-in duration-200 ">
             {props.children}
-          </button>
+        </button>
     )
 }
 

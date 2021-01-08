@@ -24,7 +24,7 @@ const SignUpSection = () => {
       <div className=" w-11/12 sm:w-7/12 md:w-11/12 lg:w-7/12 mx-auto">
         <div className="form-title mx-auto">
           <h2 className="text-3xl font-semibold">
-            Sign up and start a new adventure{" "}
+            Sign up and start a new adventure
           </h2>
           <p>Lorem ipsum dolor sit amet.</p>
         </div>

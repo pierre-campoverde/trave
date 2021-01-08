@@ -22,7 +22,6 @@ export const getCurrentUser = createAsyncThunk(
         const unsubscribe = auth.onAuthStateChanged((user) => {
           unsubscribe();
           if (user) {
-            console.log(user);
             resolve(user.uid);
           } else {
             reject("No user");

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import InputLink from "../../Molecules/Search/InputLink";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch } from "react-redux";
-import { addQuery } from "../../../Store/Slices/QueriesSlice";
 import { useHistory } from "react-router-dom";
-import {makeQuery} from '../../../Store/Slices/QueriesSlice'
-
+import { addQuery, fetchQUery } from "../../../Store/Slices/ProgramsSlice";
 const SearchHomePage = () => {
   const [query, setQuery] = useState({
     country: "",
@@ -16,19 +14,21 @@ const SearchHomePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    const {name,value}=e.target
+    const { name, value } = e.target;
     setQuery((prevState) => ({
       ...prevState,
-      [name]:value,
+      [name]: value,
     }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addQuery(query))
+    dispatch(addQuery(query))    
     history.push(
       `/programs?country=${query.country}&program=${query.program}&area=${query.area}&especiality=${query.especiality}`
     );
-    dispatch(makeQuery(query));
+
+
+
   };
   return (
     <div>
