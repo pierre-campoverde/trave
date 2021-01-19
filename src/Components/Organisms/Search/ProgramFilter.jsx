@@ -1,40 +1,57 @@
-import React from 'react'
+import React from "react";
+import { CustomRangeSlider } from "../../Molecules/Search/RangeSlider";
+import { CustomMenuSelect } from "../../Molecules/Search/Select";
+import { FaFilter } from "react-icons/fa";
+import { ClearRefinements, NumericMenu } from "react-instantsearch-dom";
+import { CustomNumericMenu } from "./NumericMenu";
 
 const ProgramFilter = () => {
-    return (
-        <div className="lg:h-full py-4 min-w-min  md:w-full lg:w-4/12 ">
-            <div className="border-2 border-red-6100 rounded-2xl lg:hidden h-16"></div>
-            <div className="shadow-md mx-auto my-6 lg:w-12/12 xl:w-11/12  hidden lg:block rounded-md border p-4">
-                <form >
-                <label htmlFor="program" className="text-sm text-gray-500">Programa:</label>
-                    <select name="program" id="ProgramType" placeholder="Program" className="border-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 w-full bg-gray-50 rounded-lg ">
-                        <option value="Bachelor">Bachelor</option>
-                        <option value="Bachelor">Master</option>
-                        <option value="Bachelor">PHD</option>
-                    </select>
-                    <label htmlFor="program" className="text-sm text-gray-500">Pais:</label>
-                    <select name="Program" id="Country" placeholder="Country" className="border-2 p-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full bg-gray-50 rounded-lg ">
-                        <option value="Bachelor">Russia</option>
-                        <option value="Bachelor">Ukraine</option>
-                        <option value="Bachelor">Poland</option>
-                    </select>
-                    <label htmlFor="program" className="text-sm text-gray-500">Area:</label>
-                    <select name="Program" id="Area" placeholder="Area" className="border-2 p-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full bg-gray-50 rounded-lg ">
-                        <option value="Bachelor">Laws</option>
-                        <option value="Bachelor">Health</option>
-                        <option value="Bachelor">Information Technology</option>
-                    </select>
-                    <label htmlFor="program" className="text-sm text-gray-500">Especialidad:</label>
-                    <select name="Program" id="Speciality" placeholder="Area" className="border-2 p-2 my-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full bg-gray-50 rounded-lg ">
-                        <option value="Bachelor">Computer science  </option>
-                        <option value="Bachelor">Applied Mathematics</option>
-                        <option value="Bachelor">Electronics & nanoelectronics</option>
-                    </select>
-                    <input type="submit" value="Buscar" className="w-full mx-0 my-2 btn-primary"/>
-                </form>
-            </div>
+  return (
+    <div className="lg:h-full py-4 min-w-min md:w-full lg:w-3/12 mx-4">
+      <div className=" rounded-2xl lg:hidden h-16"></div>
+      <div className="gradient  rounded-xl mt-12 p-4 flex justify-between">
+        <h2 className="h2 text-white ">Filtro de busqueda</h2>
+        <FaFilter className="text-xl my-auto text-white" />
+      </div>
+      <div className="shadow-md mx-auto overflow-hidden mt-5 lg:w-12/12 xl:w-12/12  hidden lg:block rounded-xl border">
+        <div className="p-2 bg-gray-100">
+          <h3 className="font-medium text-center text-gray-500">
+            ¿Que estudiar?
+          </h3>
         </div>
-    )
-}
+        <div className=" p-4 ">
+          <CustomMenuSelect label="PROGRAM" attribute="program" />
+          <CustomMenuSelect label="AREA" attribute="area" />
+          <CustomMenuSelect label="ESPECIALITY" attribute="name" />
+        </div>
+      </div>
+      <div className="shadow-md mx-auto overflow-hidden mt-5 lg:w-12/12 xl:w-12/12  hidden lg:block rounded-xl border">
+        <div className="p-2 bg-gray-100">
+          <h3 className="font-medium text-center text-gray-500">
+            ¿Donde estudiar?
+          </h3>
+        </div>
+        <div className=" p-4 ">
+          <CustomMenuSelect label="COUNTRY" attribute="country" />
+          <CustomMenuSelect label="CITY" attribute="city" />
+          <CustomMenuSelect label="UNIVERSITY" attribute="university" />
+        </div>
+      </div>
+      <div className="mt-5 ">
+        <p className="text-gray-500">Other filters</p>
+        <CustomRangeSlider attribute="fee" />
+        <CustomNumericMenu
+          attribute="duration"
+          items={[
+            { label: "< 1 año", end: 1 },
+            { label: "1 año - 2 años", end: 2 },
+            { label: "2 años - 3 años", end: 3 },
+            { label: "3 años - 5 años", end: 5 },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
 
-export default ProgramFilter
+export default ProgramFilter;

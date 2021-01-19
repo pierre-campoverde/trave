@@ -90,7 +90,7 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="border-2 p-4 w-11/12 sm:w-96 mx-auto rounded-lg px-8 shadow-md mt-4 md:mt-8">
+    <div className="border-2 p-4 w-11/12 sm:w-96 mx-auto rounded-lg px-8 shadow-md mt-4 md:mt-8 bg-gradient-to-b	from-white to-gray-100">
       <form onSubmit={handleSubmit}>
         <Input
           type={"email"}

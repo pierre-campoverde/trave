@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../../Api/config/fbConfig";
 const initialState = {
+  selectedProgram: {},
   programs: [],
   status: "idle",
   error: null,
@@ -20,7 +21,15 @@ export const fetchPrograms = createAsyncThunk(
     return programs;
   }
 );
-
+//*OBTENER UNICAMENTE UN PROGRAMA
+export const fetchProgram = createAsyncThunk(
+  "programs/fetchProgram",
+  async (id) => {
+    const res = await db.collection("Programs").doc(id).get();
+    const program = res.data();
+    return program;
+  }
+);
 //*OBTENEMOS PROGRAMAS FILTRADOS DESDE LA HOME PAGE
 export const fetchQuery = createAsyncThunk(
   "programs/fetchQuery",
@@ -52,6 +61,17 @@ const ProgramSlice = createSlice({
     },
   },
   extraReducers: {
+    [fetchProgram.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [fetchProgram.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.selectedProgram = action.payload;
+    },
+    [fetchProgram.rejected]: (state, action) => {
+      state.status = "failed";
+      console.log(action.error);
+    },
     //*FETCHING ALL PROGRAMS REDUCER */
     [fetchPrograms.pending]: (state, action) => {
       state.status = "loading";

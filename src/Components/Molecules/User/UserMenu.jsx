@@ -20,7 +20,7 @@ const UserMenu = (props) => {
     <div className="flex">
       <Link
         to={`/myuser/${myUser.uid}`}
-        className="cursor pointer flex   h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-lg  "
+        className="cursor pointer flex   h-10 rounded-full border-2  transition transition-all border-gray-300    mx-2 cursor-pointer shadow-lg  hover:shadow-none bg-gray-100"
       >
         {myUser.photoURL === null ? (
           <FaUserCircle className="text-3xl my-auto text-gray-600 rounded-full border-2 border-gray-500 bg-white" />
@@ -37,12 +37,12 @@ const UserMenu = (props) => {
         <img src="" alt="" />
       </Link>
       <div className=" mx-2  ">
-        <button className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-md">
+        <button className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all border-gray-300  mx-2 cursor-pointer shadow-lg  hover:shadow-none bg-gray-100">
           <FaBell className="text-2xl text-gray-900 m-auto " />
         </button>
       </div>
       <div className="">
-        <button onClick={handleClick} disabled={menuStatus} className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all border-gray-400 mx-2 cursor-pointer hover:shadow-md">
+        <button onClick={handleClick} disabled={menuStatus} className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all  border-gray-300  mx-2 cursor-pointer shadow-lg  hover:shadow-none bg-gray-100">
           <HiMenu className="text-2xl text-gray-900 m-auto" />
         </button>
       </div>

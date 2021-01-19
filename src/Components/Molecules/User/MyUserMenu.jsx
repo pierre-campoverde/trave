@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggle, setToggleFalse } from "../../../Store/Slices/UiSlice";
 import SubMenuLink from "./SubMenuLink";
 import { useHistory } from "react-router-dom";
