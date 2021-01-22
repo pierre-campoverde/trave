@@ -15,7 +15,7 @@ import {
   const SearchPage = () => {
     return (
         <InstantSearch searchClient={searchClient} indexName="PROGRAMS">
-        <main className="h-auto w-10/12 mx-auto lg:flex justify-between">
+        <main className="h-auto w-11/12 sm:w-10/12 mx-auto lg:flex justify-between">
         <ProgramFilter/>
         <SearchResults/>
         </main>

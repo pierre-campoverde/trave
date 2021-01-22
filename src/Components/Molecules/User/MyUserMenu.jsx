@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { toggle, setToggleFalse } from "../../../Store/Slices/UiSlice";
 import SubMenuLink from "./SubMenuLink";
 import { useHistory } from "react-router-dom";
-import { logOutUser } from "../../../Store/Slices/UserSlice";
+import { logOutUser } from "../../../Store/Slices/UserAuthFuntions/authFunctions";
 import {
   IoExitOutline,
   IoCogOutline,
@@ -13,6 +13,9 @@ import {
   IoChatboxOutline,
   IoDocumentsOutline,
 } from "react-icons/io5";
+
+
+
 const MyUserMenu = () => {
   const dispatch = useDispatch();
   const history = useHistory();

@@ -15,7 +15,7 @@ import {
   logInUser,
   logInUserGoogle,
   logInUserFacebook,
-} from "../../../Store/Slices/UserSlice";
+} from "../../../Store/Slices/UserAuthFuntions/authFunctions";
 import Checkbox from "../../Atoms/Checkbox";
 const LogInForm = () => {
   const [userCredentials, setUserCredentials] = useState({

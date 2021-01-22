@@ -2,12 +2,12 @@ import React from "react";
 import { CustomRangeSlider } from "../../Molecules/Search/RangeSlider";
 import { CustomMenuSelect } from "../../Molecules/Search/Select";
 import { FaFilter } from "react-icons/fa";
-import { ClearRefinements, NumericMenu } from "react-instantsearch-dom";
 import { CustomNumericMenu } from "./NumericMenu";
+import { CustomMenu } from "./Menu";
 
 const ProgramFilter = () => {
   return (
-    <div className="lg:h-full py-4 min-w-min md:w-full lg:w-3/12 mx-4">
+    <div className="hidden lg:block lg:h-full py-4 min-w-min md:w-full lg:w-3/12 mx-4">
       <div className=" rounded-2xl lg:hidden h-16"></div>
       <div className="gradient  rounded-xl mt-12 p-4 flex justify-between">
         <h2 className="h2 text-white ">Filtro de busqueda</h2>
@@ -49,7 +49,9 @@ const ProgramFilter = () => {
             { label: "3 años - 5 años", end: 5 },
           ]}
         />
+        <CustomMenu attribute="attendace"/>
       </div>
+      
     </div>
   );
 };

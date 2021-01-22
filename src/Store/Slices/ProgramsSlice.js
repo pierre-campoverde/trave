@@ -61,17 +61,6 @@ const ProgramSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchProgram.pending]: (state, action) => {
-      state.status = "loading";
-    },
-    [fetchProgram.fulfilled]: (state, action) => {
-      state.status = "succeeded";
-      state.selectedProgram = action.payload;
-    },
-    [fetchProgram.rejected]: (state, action) => {
-      state.status = "failed";
-      console.log(action.error);
-    },
     //*FETCHING ALL PROGRAMS REDUCER */
     [fetchPrograms.pending]: (state, action) => {
       state.status = "loading";

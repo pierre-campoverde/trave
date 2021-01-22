@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createUser } from "../../../Store/Slices/UserSlice";
+import { createUser } from "../../../Store/Slices/UserAuthFuntions/authFunctions";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Input from "../../Atoms/Input";
@@ -9,7 +9,6 @@ import Checkbox from "../../Atoms/Checkbox";
 const SignInForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const myUser = useSelector((state) => state.myUser);
   const [userCredentials, setUserCredentials] = useState({
     firstName: "",
@@ -17,7 +16,12 @@ const SignInForm = () => {
     password: "",
     email: "",
   });
-
+ //*CHECK USER LOG
+  useEffect(() => {
+    if (myUser.userLoggedIn === true) {
+      history.push("/search");
+    }
+  });
   const [errors, setErrors] = useState({});
   //*EVENT HANDLERS
   const handleChange = (e) => {
@@ -73,12 +77,7 @@ const SignInForm = () => {
     }
   };
 
-  //*CHECK USER LOG
-  useEffect(() => {
-    if (myUser.userLoggedIn === true) {
-      history.push("/search");
-    }
-  });
+ 
 
   //*EVENT HANDLERS HANDLE SUBMIT
   const handleSubmit = (e) => {

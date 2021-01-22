@@ -4,7 +4,7 @@ import { FaFacebookSquare, FaTwitter, FaGoogle } from "react-icons/fa";
 import {
   logInUserFacebook,
   logInUserGoogle,
-} from "../../Store/Slices/UserSlice";
+} from "../../Store/Slices/UserAuthFuntions/authFunctions";
 import SignInForm from '../Organisms/Auth/SignInForm'
 import { useDispatch } from "react-redux";
 

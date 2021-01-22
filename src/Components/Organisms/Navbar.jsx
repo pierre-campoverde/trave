@@ -1,25 +1,15 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../Atoms/Button";
-import { FiMenu, FiX } from "react-icons/fi";
 import Logo from "../../assets/svg/Logo";
 import UserMenu from "../Molecules/User/UserMenu";
 import { useSelector } from "react-redux";
-
-//*Crrear un variable neutra mientras que no se compuebe el stado se manteien neutra (Loading)
 const Navbar = () => {
-  const [clicked, setClicked] = useState(true);
   const userStatus = useSelector((state) => state.myUser.userLoggedIn);
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
   const [userMenuOn, setUserMenuOn] = useState(false);
-
-
   const handleUserMenu = () => {
     setUserMenuOn(!userMenuOn);
   };
-
   return (
     <>
       <nav className="bg-white absolute sticky relative top-0  block w-full border-b border-gray-300  z-40 mb-15 ">
@@ -72,7 +62,6 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-     {/*  {userMenuOn && <UserSubMenu userMenuCallback={handleUserMenu} className="fixed z-10 " isOn={userMenuOn} />} */}
     </>
   );
 };

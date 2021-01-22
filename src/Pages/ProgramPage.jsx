@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProgramsById } from "../Store/Slices/ProgramsSlice";
 import { AiFillStar } from "react-icons/ai";
 import { RiMedalFill } from "react-icons/ri";
-import { FiBookmark } from "react-icons/fi";
 import ProgramCTA from "../Components/Organisms/ProgramPage/ProgramCTA";
-import ButtonNav from "../Components/Atoms/Buttons/ButtonNav";
 import ProgramTitle from "../Components/Organisms/ProgramPage/ProgramTitle";
 import ProgramDescription from "../Components/Organisms/ProgramPage/ProgramDescription";
 import ProgramKeyInfo from "../Components/Organisms/ProgramPage/ProgramKeyInfo";
 import ProgramInfoSlider from "../Components/Organisms/ProgramPage/ProgramInfoSlider";
 import { fetchProgram } from "../Store/Slices/ProgramsSlice";
+import SaveButton from "../Components/Atoms/SaveButton";
 const ProgramPage = ({ match }) => {
   const dispatch = useDispatch();
   const { programId } = match.params;
-
   const program = useSelector((state) => state.programs.selectedProgram);
-
   //TODO modificar la functio para obtener el programa
   useEffect(() => {
     dispatch(fetchProgram(programId));
@@ -45,10 +41,7 @@ const ProgramPage = ({ match }) => {
               </span>
             </div>
           </div>
-          <button className=" my-auto h-10 border-2 flex px-5 border-gray-400 rounded-lg text-gray-500 shadow-md hover:shadow-lg hover:border-black hover:text-black  ">
-            <FiBookmark className="my-auto text-xl" />
-            <p className="my-auto">Guardar</p>
-          </button>
+          <SaveButton/>
         </div>
         {/*GALLERY COMPONNENT */}
         <div className="h-80 w-full  my-3 rounded-2xl bg-gray-100"></div>

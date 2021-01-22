@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 import { db } from "../Api/config/fbConfig";
 const UniversityProfile = () => {
   const [program, setProgram] = useState({
@@ -13,7 +12,7 @@ const UniversityProfile = () => {
     e.preventDefault();
     console.log(program);
     try {
-      const res = await db.collection("Programs").add(program);
+       await db.collection("Programs").add(program);
       console.log('Programa creado existosamente');
     } catch (error) {
       console.log(error);

@@ -3,7 +3,7 @@ import InputLink from "../../Molecules/Search/InputLink";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addQuery, fetchQUery } from "../../../Store/Slices/ProgramsSlice";
+import { addQuery } from "../../../Store/Slices/ProgramsSlice";
 const SearchHomePage = () => {
   const [query, setQuery] = useState({
     country: "",

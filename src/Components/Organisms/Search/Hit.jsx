@@ -1,24 +1,28 @@
 import React from 'react'
 import { GrLocation } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
+import SaveButton from '../../Atoms/SaveButton'
 import Tag from '../../Atoms/Tag'
 
 const Hit = ({hit}) => {
-
+    
     return (
         <div
-      className="w-40 h-56 rounded-xl w-full
-        border-2 my-5 border-gray-200 
+      className=" h-auto rounded-xl w-full
+        border my-5 border-gray-200 
         shadow-md
-        overflow-hidden  
         hover:shadow-lg
          "
     >
       <Link to={`/programs/${hit.objectID}`}>
-        <div className="flex h-full w-full">
-          <div className="h-full w-4/12 bg-gray-100"></div>
-          <div className="w-8/12 h-full  p-4  ">
-            <h2 className="h2">{hit.name}</h2>
+        <div className="md:flex h-full w-full">
+          <div className="h-60 md:h-auto w-full md:w-4/12 bg-gray-200 "></div>
+          <div className="md:w-8/12 h-full  p-4  ">
+            <div className="flex justify-between">
+              <h2 className="h2">{hit.name}</h2>
+              <SaveButton programID={hit.objectID}/>
+            </div>
+            
 
             <div className="flex text-gray-500">
               <GrLocation className=" my-auto text-gray-500" />

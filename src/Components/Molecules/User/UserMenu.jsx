@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../../Store/Slices/UiSlice";
 import { Link } from "react-router-dom";
 import MyUserMenu from "./MyUserMenu";
-
-const UserMenu = (props) => {
-  // eslint-disable-next-line
-  const myUser = useSelector((state) => state.myUser.data);
+const UserMenu = () => {
+  const myUser = useSelector((state) => state.myUser.data.userData);
   const menuStatus = useSelector((state) => state.interface.value);
   const dispatch = useDispatch();
   const handleClick = () => {

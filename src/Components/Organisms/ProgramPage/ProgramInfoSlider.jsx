@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ButtonNav from "../../Atoms/Buttons/ButtonNav";
 import ProgramSlideContent from "./ProgramSlideContent";
-import ProgramStructure from "./ProgramStructure";
 
 const ProgramInfoSlider = () => {
   const [info, setInfo] = useState('ProgramStructure');

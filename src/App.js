@@ -9,20 +9,20 @@ import ContactPage from "./Pages/ContactPage";
 import HomePage from "./Pages/HomePage";
 import ProgramPage from "./Pages/ProgramPage";
 import UserProfile from "./Pages/UserProfile";
-import Testing from "./Pages/Testing";
 import "rheostat/initialize";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getCurrentUser } from "./Store/Slices/UserSlice";
 import LoadingPage from "./Pages/LoadingPage";
 import { Toaster } from "react-hot-toast";
 import UniversityProfile from "./Pages/UniversityProfile";
+import { getUserStatus } from "./Store/Slices/UserAuthFuntions/authFunctions";
+
 function App() {
   const userStatus = useSelector((state) => state.myUser.userLoggedIn);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCurrentUser());
-  });
+    dispatch(getUserStatus());
+  }, []);
 
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
         <LoadingPage />
       ) : (
         <>
-          <Navbar />{" "}
+          <Navbar />
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/login" component={LogInPage} />
