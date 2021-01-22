@@ -10,7 +10,7 @@ const UserMenu = () => {
   const menuStatus = useSelector((state) => state.interface.value);
   const dispatch = useDispatch();
   const handleClick = () => {
-    if(menuStatus===false){
+    if (menuStatus === false) {
       dispatch(toggle());
     }
   };
@@ -40,7 +40,11 @@ const UserMenu = () => {
         </button>
       </div>
       <div className="">
-        <button onClick={handleClick} disabled={menuStatus} className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all  border-gray-300  mx-2 cursor-pointer shadow-lg  hover:shadow-none bg-gray-100">
+        <button
+          onClick={handleClick}
+          disabled={menuStatus}
+          className="h-10 w-10 cursor pointer flex focus:outline-none  h-10 rounded-full border-2  transition transition-all  border-gray-300  mx-2 cursor-pointer shadow-lg  hover:shadow-none bg-gray-100"
+        >
           <HiMenu className="text-2xl text-gray-900 m-auto" />
         </button>
       </div>

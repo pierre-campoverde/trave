@@ -28,7 +28,7 @@ const LogInForm = () => {
   const history = useHistory();
   useEffect(() => {
     if (myUser.userLoggedIn === true) {
-      history.push("/search");
+      history.push("/");
     }
   });
 

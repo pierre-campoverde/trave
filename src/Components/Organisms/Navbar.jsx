@@ -4,12 +4,10 @@ import Button from "../Atoms/Button";
 import Logo from "../../assets/svg/Logo";
 import UserMenu from "../Molecules/User/UserMenu";
 import { useSelector } from "react-redux";
+import NavbarButtons from "../Molecules/User/NavbarButtons";
 const Navbar = () => {
   const userStatus = useSelector((state) => state.myUser.userLoggedIn);
-  const [userMenuOn, setUserMenuOn] = useState(false);
-  const handleUserMenu = () => {
-    setUserMenuOn(!userMenuOn);
-  };
+ 
   return (
     <>
       <nav className="bg-white absolute sticky relative top-0  block w-full border-b border-gray-300  z-40 mb-15 ">
@@ -52,14 +50,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          {userStatus ? (
-            <UserMenu userMenuCallback={handleUserMenu} />
-          ) : (
-            <div className="hidden button-group sm:flex mr-5">
-              <Button type={"secondary"} to={"/signup"} name={"Sign Up"} />
-              <Button type={"primary"} to={"/login"} name={"Log in"} />
-            </div>
-          )}
+          <NavbarButtons userState={userStatus}/>
         </div>
       </nav>
     </>

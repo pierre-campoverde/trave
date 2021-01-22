@@ -2,9 +2,10 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const algoliaSearch = require("algoliasearch");
 admin.initializeApp();
-/* const APP_ID = functions.config().algolia.app;
-const ADMIN_KEY = functions.config().algolia.key; */
-const client = algoliaSearch("V0MLISWCE7", "5c9fe1b3389fbf5f0de9bb0c11df0aaa");
+//todo POSIBLIE FUTURO ERROR EN DECARAIONE ENV
+const APP_ID = functions.config().algolia.app;
+const ADMIN_KEY = functions.config().algolia.key;
+const client = algoliaSearch(APP_ID, ADMIN_KEY);
 const index = client.initIndex("PROGRAMS");
 
 exports.addToIndex = functions.firestore

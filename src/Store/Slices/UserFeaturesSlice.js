@@ -1,45 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialData={
-  data:{userData:{}},
+import * as userFeatures from './UserFeaturesFunctions/featuresFunctions'
+const initialState={
+  data:{savedPrograms:{}},
   status:'idle',
   error:null,
   errorMessage:''
 }
-
 const myUserFeatureSlice=createSlice({
   name:"myUserFeatures",
-  
-})
-
-
-
-
-
-
-
-
-//!PROGRAMS METHODS
-    //*GET MYPROGRAMS
-    [fetchMyPrograms.pending]: (state) => {
+  initialState:{},
+  reducers:{
+    saveProgramLocally:
+  },
+  extraReducers:{
+    [userFeatures.getUserPrograms.pending]: (state) => {
         state.status = "loading";
       },
-      [fetchMyPrograms.fulfilled]: (state, action) => {
+      [userFeatures.getUserPrograms.fulfilled]: (state, action) => {
         state.status = "succeeded";
         state.data.mySavedPrograms = action.payload;
       },
-      [fetchMyPrograms.rejected]: (state) => {
+      [userFeatures.getUserPrograms.rejected]: (state) => {
         state.status = "failed";
       },
       //*SAVE PROGRAMS
-      [saveProgram.pending]: (state) => {
+      [userFeatures.saveProgram.pending]: (state) => {
         state.status = "loading";
       },
-      [saveProgram.fulfilled]: (state, action) => {
+      [userFeatures.saveProgram.fulfilled]: (state, action) => {
         state.status = "Succeeded";
       },
-      [saveProgram.rejected]: (state, action) => {
+      [userFeatures.saveProgram.rejected]: (state, action) => {
         state.error = action.errorCode;
         console.log(action);
-      },
-export const { saveProgramLocally } = myUserSlice.actions;
+      }
+  }
+})
+export const { saveProgramLocally } = myUserFeatureSlice.actions;
+export default myUserFeatureSlice.reducer

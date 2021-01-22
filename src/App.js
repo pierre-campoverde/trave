@@ -26,26 +26,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      {userStatus === null ? (
-        <LoadingPage />
-      ) : (
-        <>
-          <Navbar />
-          <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/login" component={LogInPage} />
-            <Route path="/signup" component={SignUpPage} />
-            <Route path="/contact" component={ContactPage} />
-            <Route path="/programs/:programId" component={ProgramPage} />
-            <Route path="/search" component={SearchPage} />
-            <Route path="/programs" component={SearchPage} />
-            <Route path="/myuser/:userId" component={UserProfile} />
-            <Route path="/university" component={UniversityProfile} />
-          </Switch>
-          <Toaster position="bottom-left" />
-          <Footer />
-        </>
-      )}
+      <>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/login" component={LogInPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route path="/programs/:programId" component={ProgramPage} />
+          <Route path="/search" component={SearchPage} />
+          <Route path="/programs" component={SearchPage} />
+          <Route path="/myuser/:userId" component={UserProfile} />
+          <Route path="/university" component={UniversityProfile} />
+        </Switch>
+        <Toaster position="bottom-left" />
+        <Footer />
+      </>
     </BrowserRouter>
   );
 }
