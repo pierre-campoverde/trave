@@ -3,21 +3,28 @@ import { db } from "../Api/config/fbConfig";
 const UniversityProfile = () => {
   const [program, setProgram] = useState({
     univeristyID: "bCF1ayCX5JI8X0VAobOs",
+    name: "",
   });
+  //TODO HACER PARSE A LOS NUMEROS
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProgram((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "duration" || name=== "fee") {
+      setProgram((prevState) => ({ ...prevState, [name]: JSON.parse(value) }));
+      console.log(program);
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(program);
     try {
-       await db.collection("Programs").add(program);
-      console.log('Programa creado existosamente');
+      await db.collection("Programs").add(program);
+      console.log("Programa creado existosamente");
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="h-screen flex">
       <div className="border-2 m-auto p-4 h-auto md:w-10/12 lg:w-6/12 border-gray-200 rounded-xl shadow-lg">
@@ -55,7 +62,7 @@ const UniversityProfile = () => {
               placeholder="Country"
               onChange={handleChange}
             />
-             <input
+            <input
               type="text"
               name="university"
               className="border-2 my-2 w-full bg-gray-100 rounded-lg p-3"

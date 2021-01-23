@@ -27,11 +27,10 @@ const SearchResults = () => {
   }, );
 
   return (
-    <section className=" my-10 lg:w-8/12 min-h-screen py-6 ">
+    <section className=" lg:my-10 lg:w-8/12 min-h-screen py-6 ">
       <LoadingIndicator />
-      <CustomClearRefinements />
       <div className="divide-y-2">
-        <div className="py-2 flex  content-end justify-between ">
+        <div className="hidden lg:block py-2 flex  content-end justify-between ">
           <h2 className="text-lg text-gray-600">Tus resultados de busqueda:</h2>
           <CustomSortByPrice
             defaultRefinement="PROGRAMS"
