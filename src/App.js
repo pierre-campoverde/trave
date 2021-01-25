@@ -7,6 +7,7 @@ import SignUpPage from "./Pages/SignUpPage";
 import SearchPage from "./Pages/SearchPage";
 import ContactPage from "./Pages/ContactPage";
 import HomePage from "./Pages/HomePage";
+import Testing from "./Pages/Testing";
 import ProgramPage from "./Pages/ProgramPage";
 import UserProfile from "./Pages/UserProfile";
 import "rheostat/initialize";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/programs/:programId" component={ProgramPage} />
           <Route path="/search" component={SearchPage} />
           <Route path="/programs" component={SearchPage} />
+          <Route path="/testing" component={Testing} />
           <Route path="/myuser/:userId" component={UserProfile} />
           <Route path="/university" component={UniversityProfile} />
         </Switch>

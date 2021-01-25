@@ -1,17 +1,30 @@
 import React from "react";
-import { FiBookmark } from "react-icons/fi";
+
+import Skeleton from "react-loading-skeleton";
+import SaveButton from "../../Atoms/SaveButton";
 
 const ProgramTitle = (props) => {
   return (
-    <div className=" w-full py-3 flex justify-between">
-      <div>
-        <h3 className="text-xl font-medium">{props.title}</h3>
-        <p className="text-sm text-gray-500">Bachelor • Ciencias Aplicadas </p>
+    <div className=" mb-3.5">
+      
+      <div className="flex justify-between w-full">
+        <h2 className="h2">{props.programName || <Skeleton count={2} />}</h2>
+        <SaveButton />
       </div>
-      <button className=" my-auto h-10 border-2 flex px-5 border-gray-400 rounded-lg text-gray-500 shadow-md hover:shadow-lg hover:border-black hover:text-black  ">
-            <FiBookmark className="my-auto text-xl" />
-            <p className="my-auto">Guardar</p>
-          </button>
+      <div className="flex flex-shrink-0 mt-2">
+          {props.programType && (
+            <p className="text-sm text-gray-500 mr-2">●{props.programType}</p>
+          )}
+           {props.attendance && (
+            <p className="text-sm text-gray-500 mr-2">●{props.attendance}</p>
+          )}
+           {props.format && (
+            <p className="text-sm text-gray-500 mr-2">● {props.format}</p>
+          )}
+        </div>
+      <div>
+        
+      </div>
     </div>
   );
 };

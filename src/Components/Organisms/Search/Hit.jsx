@@ -5,7 +5,10 @@ import SaveButton from '../../Atoms/SaveButton'
 import Tag from '../../Atoms/Tag'
 
 const Hit = ({hit}) => {
-    
+
+    const handleClick=()=>{
+      window.scrollTo(0,0)
+    }
     return (
         <div
       className=" h-auto rounded-xl w-full
@@ -14,7 +17,7 @@ const Hit = ({hit}) => {
         hover:shadow-lg
          "
     >
-      <Link to={`/programs/${hit.objectID}`}>
+      <Link to={`/programs/${hit.objectID}`} onClick={handleClick}>
         <div className="md:flex h-full w-full">
           <div className="h-60 md:h-auto w-full md:w-4/12 bg-gray-200 "></div>
           <div className="md:w-8/12 h-full  p-4  ">

@@ -2,9 +2,8 @@ import React from "react";
 
 const ProgramDescription = () => {
   return (
-    <article className="py-3">
-      <h4 className="text-lg font-medium">Descripcion</h4>
-      <p className="text-gray-500">
+    <article className="py-3 hidden md:block">
+      <p className="body-base">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
         eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
         voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet

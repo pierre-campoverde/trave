@@ -27,6 +27,7 @@ export const fetchProgram = createAsyncThunk(
   async (id) => {
     const res = await db.collection("Programs").doc(id).get();
     const program = res.data();
+    console.log(program);
     return program;
   }
 );
@@ -72,6 +73,17 @@ const ProgramSlice = createSlice({
     [fetchPrograms.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
+    },
+    [fetchProgram.pending]: (state) => {
+      state.status = "loading";
+    },
+    [fetchProgram.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.selectedProgram = action.payload;
+    },
+    [fetchProgram.rejected]: (state) => {
+      state.status = "failed";
+      state.program = {};
     },
     //*FETCHING QUERIES REDUCER
     [fetchQuery.pending]: (state, action) => {
