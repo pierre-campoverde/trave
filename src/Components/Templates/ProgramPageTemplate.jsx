@@ -7,6 +7,7 @@ import ProgramDescription from "../Organisms/ProgramPage/ProgramDescription";
 import ProgramCTA from "../Organisms/ProgramPage/ProgramCTA";
 import ProgramKeyInfo from "../Organisms/ProgramPage/ProgramKeyInfo";
 import ProgramInfoSlider from '../Organisms/ProgramPage/ProgramInfoSlider'
+import ProgramInfoMenu from "../Organisms/ProgramPage/ProgramInfoMenu";
 const ProgramPageTemplate = (props) => {
   const dispatch = useDispatch();
   const program = useSelector((state) => state.programs.selectedProgram);
@@ -17,8 +18,8 @@ const ProgramPageTemplate = (props) => {
   return (
     <main className="min-h-screen relative">
       <ProgramBanner />
-      <section className="md:px-32 border-2 h-full relative ">
-        <div className="rounded-t-3xl transform -translate-y-52 md:-translate-y-40 w-full bg-white py-8 px-10 ">
+      <section className="border-2 h-full relative ">
+        <div className="w-full  md:w-11/12 lg:w-10/12 mx-auto rounded-t-3xl transform -translate-y-52 md:-translate-y-40 bg-white py-8 px-5 md:px-10 ">
           <div className="md:flex justify-between">
             <div className="w-full md:w-7/12 divide-y-2">
               <ProgramTitle
@@ -38,6 +39,7 @@ const ProgramPageTemplate = (props) => {
             language={program.language}
           />
           <ProgramInfoSlider/>
+          <ProgramInfoMenu/>
         </div>
       </section>
     

@@ -17,7 +17,7 @@ const ProgramCTA = (props) => {
         <p className="h3 ml-auto">1500$</p>
       </div>
       <div className="col-span-2">
-        <button className="btn-cta w-full p-3">Inscribirse</button>
+        <button className="btn-cta w-full p-3 font-medium text-lg">Inscribirse</button>
       </div>
     </div>
   );

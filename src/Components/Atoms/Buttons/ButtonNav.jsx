@@ -2,7 +2,7 @@ import React from "react";
 
 const ButtonNav = (props) => {
   return (
-    <button onClick={props.handleClick} className="button-nav">
+    <button onClick={()=>props.handleClickCallback(props.name)} className="btn-bordered-gray">
       {props.name}
     </button>
   );

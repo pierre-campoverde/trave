@@ -3,7 +3,7 @@ import React from "react";
 import Accordion from "../../Molecules/Program/Accordion";
 const ProgramInfoSlider = () => {
   return (
-    <div>
+    <div className="md:hidden">
       <Accordion name={"Visado"} >
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus,
