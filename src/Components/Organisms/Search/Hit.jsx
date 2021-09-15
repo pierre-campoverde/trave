@@ -12,6 +12,7 @@ const Hit = ({hit}) => {
     return (
         <div
       className=" h-auto rounded-xl w-full
+      overflow-hidden
         border my-5 border-gray-200 
         shadow-md
         hover:shadow-lg

@@ -36,7 +36,7 @@ const ProgramInfoContent = (props) => {
   );
 };
 const ProgramInfoMenu = () => {
-  const [content, setContent] = useState("Visado");
+  const [content, setContent] = useState("Requisitos de admision");
   const handleClick= (value) => {
     setContent(value);
     console.log(content);

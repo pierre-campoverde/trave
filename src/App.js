@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import UniversityProfile from "./Pages/UniversityProfile";
 import { getUserStatus } from "./Store/Slices/UserAuthFuntions/authFunctions";
+import UniversityAddProgram from "./Pages/UniversityAddProgram";
+import PageNotFound from "./Pages/PageNotFound";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,7 +38,16 @@ function App() {
           <Route path="/programs" component={SearchPage} />
           <Route path="/testing" component={Testing} />
           <Route path="/myuser/:userId" component={UserProfile} />
-          <Route path="/university" component={UniversityProfile} />
+          <Route
+            path="/university/:universityId"
+            component={UniversityProfile}
+          />
+          <Route path="/university/:universityId/*" component={PageNotFound} />
+          <Route
+            path="/university/:universityId/add_program"
+            component={UniversityAddProgram}
+          />
+          <Route path="*" component={PageNotFound} />
         </Switch>
         <Toaster position="bottom-left" />
         <Footer />

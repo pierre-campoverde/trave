@@ -17,8 +17,8 @@ const ProgramPageTemplate = (props) => {
   }, []);
   return (
     <main className="min-h-screen relative">
-      <ProgramBanner />
-      <section className="border-2 h-full relative ">
+      <ProgramBanner university={program.university} universityID={program.univeristyID}/>
+      <section className="h-full relative ">
         <div className="w-full  md:w-11/12 lg:w-10/12 mx-auto rounded-t-3xl transform -translate-y-52 md:-translate-y-40 bg-white py-8 px-5 md:px-10 ">
           <div className="md:flex justify-between">
             <div className="w-full md:w-7/12 divide-y-2">

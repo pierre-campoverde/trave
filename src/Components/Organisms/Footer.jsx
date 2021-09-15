@@ -55,16 +55,7 @@ const Footer = () => {
                     Program finder
                   </Link>
                 </li>
-                <li className="mt-2">
-                  <Link to="/" className="md:text-md">
-                    Apptitudinal test
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link to="/" className="md:text-md">
-                    Ukraine
-                  </Link>
-                </li> 
+              
               </ul>
             </div>
             <div className="col-span-6 md:col-span-3 my-2">
